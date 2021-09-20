@@ -11,6 +11,8 @@ import generateQueryString from '../../lib/generateQueryString';
 import Layout from '../../components/Layout';
 import MediaItem from '../../components/MediaItem';
 import Pagination from '../../components/Pagination';
+import Filters from '../../components/Filters';
+import correctQueryObj from '../../lib/correctQueryObj';
 
 interface Data extends Response {
 	state: {
@@ -26,6 +28,7 @@ interface DiscoverPageProps {
 const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 	const router = useRouter();
 	const [mediaPath, setMediaPath] = useState(data?.state.pathname || 'filmer');
+	const [showFilters, setShowFilters] = useState(false);
 
 	useEffect(() => {
 		if (mediaPath !== data?.state.pathname) {
@@ -39,6 +42,12 @@ const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 		<Layout>
 			{data && (
 				<>
+					{showFilters && (
+						<Filters
+							closeModal={() => setShowFilters(false)}
+							initialState={data.state}
+						/>
+					)}
 					<Container>
 						<h1 className='text-xl font-bold'>Utforsk</h1>
 						<div className='flex gap-2 mt-5'>
@@ -51,7 +60,7 @@ const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 									{ value: 'serier', label: 'Serier' },
 								]}
 							/>
-							<Button onClick={() => {}} Icon={MenuAlt3Icon}>
+							<Button onClick={() => setShowFilters(true)} Icon={MenuAlt3Icon}>
 								Filtrer
 							</Button>
 						</div>
@@ -87,8 +96,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	else if (media === 'serier') apiPath = 'tv';
 	else return { notFound: true };
 
-	const query = { ...context.query };
-	delete query.media;
+	// Retter opp query-parameterne slik at det passer med API-en
+	const query = correctQueryObj({ media, originalQueryObject: context.query });
 
 	const apiQuery = generateQueryString({
 		api_key: process.env.TMDB_API_KEY,
@@ -97,13 +106,21 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	});
 
 	try {
+		// Dersom 'sort_by' er lik 'top_rated', hent dette fra API-en:
+		const topRatedReq =
+			query.sort_by === 'top_rated'
+				? `https://api.themoviedb.org/3/${apiPath}/top_rated/${apiQuery}`
+				: null;
+
+		// Hvis ikke, hent dette:
 		const req = `https://api.themoviedb.org/3/discover/${apiPath}/${apiQuery}`;
-		const res: AxiosResponse<Response> = await axios.get(req);
+
+		const res: AxiosResponse<Response> = await axios.get(topRatedReq || req);
 		const data = {
 			...res.data,
 			state: {
 				pathname: media,
-				query: { ...query },
+				query: { ...context.query },
 			},
 		};
 
