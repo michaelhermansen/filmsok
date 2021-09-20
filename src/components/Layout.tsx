@@ -1,9 +1,14 @@
 import Header from './Header';
 
-const Layout = ({ children }: { children: any }) => {
+interface LayoutProps {
+	children: any;
+	searchState?: string;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children, searchState }) => {
 	return (
 		<>
-			<Header />
+			<Header searchState={searchState} />
 			<main className='py-8'>{children}</main>
 		</>
 	);

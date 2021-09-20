@@ -87,7 +87,8 @@ const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 export default DiscoverPage;
 
 export const getServerSideProps: GetServerSideProps = async context => {
-	let media = context.params?.media;
+	const media = context.params?.media;
+	delete context.query.media;
 
 	// Endre 'filmer' og 'serier' til 'movie' og 'tv' slik at det passer med TMDB sin api.
 	// Returner 404 om media verken er 'filmer' eller 'serier'.
@@ -101,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
 	const apiQuery = generateQueryString({
 		api_key: process.env.TMDB_API_KEY,
-		language: 'no-NB',
+		language: 'no',
 		...query,
 	});
 
@@ -109,11 +110,11 @@ export const getServerSideProps: GetServerSideProps = async context => {
 		// Dersom 'sort_by' er lik 'top_rated', hent dette fra API-en:
 		const topRatedReq =
 			query.sort_by === 'top_rated'
-				? `https://api.themoviedb.org/3/${apiPath}/top_rated/${apiQuery}`
+				? `https://api.themoviedb.org/3/${apiPath}/top_rated${apiQuery}`
 				: null;
 
 		// Hvis ikke, hent dette:
-		const req = `https://api.themoviedb.org/3/discover/${apiPath}/${apiQuery}`;
+		const req = `https://api.themoviedb.org/3/discover/${apiPath}${apiQuery}`;
 
 		const res: AxiosResponse<Response> = await axios.get(topRatedReq || req);
 		const data = {

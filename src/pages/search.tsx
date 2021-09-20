@@ -21,7 +21,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ data }) => {
 	const searchString = decodeURI(`${data?.state.query.query}`);
 
 	return (
-		<Layout>
+		<Layout searchState={searchString}>
 			{data && (
 				<>
 					<Container>
@@ -59,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const apiQuery = generateQueryString({
 		api_key: process.env.TMDB_API_KEY,
 		query: searchQuery,
-		language: 'no-NB',
+		language: 'no',
 		page: context.query.page || '1',
 	});
 

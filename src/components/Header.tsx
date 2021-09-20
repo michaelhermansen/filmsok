@@ -5,11 +5,11 @@ import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-const Header = () => {
+const Header = ({ searchState }: { searchState?: string }) => {
 	const { loading } = useContext(LoadingContext);
 	const router = useRouter();
 
-	const [searchInput, setSearchInput] = useState('');
+	const [searchInput, setSearchInput] = useState(searchState || '');
 
 	const handleSearch: FormEventHandler<HTMLFormElement> = e => {
 		e.preventDefault();

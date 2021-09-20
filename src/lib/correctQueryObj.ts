@@ -6,7 +6,6 @@ const correctQueryObj = ({
 	originalQueryObject: NodeJS.Dict<string | string[]>;
 }) => {
 	const query = { ...originalQueryObject };
-	delete query.media;
 	if (query.sort_by === 'top_rated') delete query.top_rated;
 
 	if (query.from_date) {
