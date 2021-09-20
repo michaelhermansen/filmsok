@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/solid';
 
 interface PaginationProps {
 	currentPage: number;
@@ -31,25 +32,24 @@ const Pagination: React.FC<PaginationProps> = ({
 	};
 
 	return (
-		<div className=''>
+		<div className='py-14'>
 			{totalPages > 0 && (
 				<ReactPaginate
 					forcePage={currentPage - 1}
 					pageCount={totalPages}
-					pageRangeDisplayed={4}
+					pageRangeDisplayed={2}
 					marginPagesDisplayed={1}
 					onPageChange={handlePageChange}
-					nextLabel='→'
-					previousLabel='←'
+					nextLabel={<ArrowRightIcon className='w-4 h-4' />}
+					previousLabel={<ArrowLeftIcon className='w-4 h-4' />}
 					breakLabel='…'
 					disableInitialCallback={true}
-					containerClassName='flex gap-1 sm:gap-6 md:gap-8 items-center mx-auto w-min pt-14 text-sm md:text-base'
-					previousLinkClassName='block p-2'
-					nextLinkClassName='block p-2'
-					pageLinkClassName='block py-1 px-2'
+					containerClassName='flex gap-3 sm:gap-6 md:gap-9 items-center mx-auto w-min text-sm md:text-base'
+					previousLinkClassName='block w-8 h-8 shadow-lg rounded-full bg-white grid place-items-center'
+					nextLinkClassName='block w-8 h-8 shadow-lg rounded-full bg-white grid place-items-center'
+					pageLinkClassName='block p-1'
 					activeClassName='border-b border-gray-800'
-					breakLinkClassName='pointer-events-none select-none'
-					breakClassName='text-gray-400'
+					breakLinkClassName='pointer-events-none select-none text-gray-400'
 				/>
 			)}
 		</div>

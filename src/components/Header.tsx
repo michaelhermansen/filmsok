@@ -29,28 +29,30 @@ const Header = () => {
 			<Link href={'/filmer'}>
 				<a className='font-bold p-1'>Filmsøk</a>
 			</Link>
-			<section role='search' className='relative flex items-center'>
-				<form onSubmit={handleSearch}>
-					<input
-						className='pl-4 px-10 py-2 w-56 bg-gray-100 rounded-full text-sm'
-						placeholder='Søk etter filmer og tv-serier …'
-						type='text'
-						role='searchbox'
-						name='search'
-						id='search'
-						value={searchInput}
-						onChange={e => setSearchInput(e.target.value)}
-						disabled={loading}
-					/>
-					<button
-						type='submit'
-						className='absolute right-0 p-2 pr-4'
-						disabled={loading}
-					>
-						<SearchIcon className='w-4 h-4' />
-					</button>
-				</form>
-			</section>
+			<form
+				onSubmit={handleSearch}
+				role='search'
+				className='relative w-full max-w-sm pl-2'
+			>
+				<input
+					className='pl-4 pr-10 py-2 bg-gray-100 rounded-full text-sm w-full'
+					placeholder='Søk etter filmer og tv-serier …'
+					type='text'
+					role='searchbox'
+					name='search'
+					id='search'
+					value={searchInput}
+					onChange={e => setSearchInput(e.target.value)}
+					disabled={loading}
+				/>
+				<button
+					type='submit'
+					className='absolute right-0 p-2 pr-4'
+					disabled={loading}
+				>
+					<SearchIcon className='w-4 h-4' />
+				</button>
+			</form>
 		</header>
 	);
 };
