@@ -20,7 +20,6 @@ const Pagination: React.FC<PaginationProps> = ({
 	const handlePageChange = ({ selected }: { selected: number }) => {
 		if (selected + 1 !== currentPage) {
 			window.scrollTo({ top: 0 });
-			console.log(queryState);
 			router.push({
 				pathname: pathState,
 				query: {
