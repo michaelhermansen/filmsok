@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Dropdown from './shared/Dropdown';
 import Button from './shared/Button';
 import { useRouter } from 'next/router';
+import { XIcon } from '@heroicons/react/solid';
 
 interface FiltersProps {
 	closeModal: () => void;
@@ -71,12 +72,22 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 	};
 
 	return (
-		<section ref={bgRef} className='fixed inset-0 bg-black bg-opacity-25 z-50'>
+		<section
+			ref={bgRef}
+			className='fixed inset-0 px-2 bg-black bg-opacity-40 z-50'
+		>
 			<form
 				onSubmit={handleSubmit}
 				onReset={handleReset}
-				className='bg-gray-50 p-6 rounded-lg max-w-2xl mx-auto shadow-xl relative top-20'
+				className='bg-gray-50 p-6 rounded-lg max-w-2xl mx-auto shadow-xl relative top-8'
 			>
+				<button
+					type='button'
+					onClick={closeModal}
+					className='absolute top-6 right-6'
+				>
+					<XIcon className='h-5 w-5' />
+				</button>
 				<h1 className='text-xl font-bold'>Filtrer</h1>
 				<div className='pt-8'>
 					<h2 className='font-semibold pb-2'>Sorter etter</h2>
@@ -97,7 +108,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 								Fra og med
 							</label>
 							<input
-								className='block w-full py-2 px-4 rounded-lg border border-gray-200'
+								className='block w-full py-2 px-4 rounded-lg border border-gray-200 appearance-none h-10'
 								type='date'
 								name='date_from'
 								id='date_from'
@@ -110,7 +121,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 								Til og med
 							</label>
 							<input
-								className='block w-full py-2 px-4 rounded-lg border border-gray-200'
+								className='block w-full py-2 px-4 rounded-lg border border-gray-200 appearance-none h-10'
 								type='date'
 								name='date_to'
 								id='date_to'
@@ -121,7 +132,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 					</div>
 					<div className='flex gap-2 flex-col sm:flex-row border-t border-gray-100 pt-6 mt-6'>
 						<Button type='reset' className='flex-1'>
-							Tilbakestill
+							Nullstill
 						</Button>
 						<Button type='submit' className='flex-1'>
 							Vis resultater
