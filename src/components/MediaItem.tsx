@@ -1,10 +1,10 @@
 import { LoadingContext } from '../lib/loadingContext';
 import { Result } from '../types/Response';
 import { useContext, useState } from 'react';
-import getRatingColor from '../lib/getRatingColor';
 import Image from 'next/image';
 import Link from 'next/link';
 import translateGenreId from '../lib/translateGenreId';
+import classNames from 'classnames';
 
 interface MediaItemProps {
 	media: Result;
@@ -15,7 +15,6 @@ const MediaItem: React.FC<MediaItemProps> = ({ media }) => {
 	const mediaDate = media.release_date || media.first_air_date || '';
 	const mediaYear = mediaDate.substring(0, 4);
 	const mediaType = media.title ? 'filmer' : 'serier';
-	const ratingColor = getRatingColor(media.vote_average);
 	const mainGenre = translateGenreId(media.genre_ids[0], mediaType);
 
 	const [imgError, setImgError] = useState(false);
@@ -49,7 +48,14 @@ const MediaItem: React.FC<MediaItemProps> = ({ media }) => {
 					{media.vote_average > 0 && (
 						<div className='mt-8 flex gap-2 items-center'>
 							<p>{media.vote_average.toFixed(1)}</p>
-							<div className={'h-1 w-1 rounded-full' + ratingColor}></div>
+							<div
+								className={classNames('h-1 w-1 rounded-full', {
+									'bg-red-500': media.vote_average < 4,
+									'bg-yellow-500':
+										media.vote_average >= 4 && media.vote_average < 7,
+									'bg-green-500': media.vote_average >= 7,
+								})}
+							></div>
 						</div>
 					)}
 					{!media.vote_average && <p className='mt-8'>N/A</p>}
