@@ -18,6 +18,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
 	const handlePageChange = ({ selected }: { selected: number }) => {
 		if (selected + 1 !== currentPage) {
+			window.scrollTo({ top: 0 });
 			console.log(queryState);
 			router.push({
 				pathname: pathState,
@@ -30,7 +31,7 @@ const Pagination: React.FC<PaginationProps> = ({
 	};
 
 	return (
-		<div>
+		<div className=''>
 			{totalPages > 0 && (
 				<ReactPaginate
 					forcePage={currentPage - 1}
@@ -38,14 +39,17 @@ const Pagination: React.FC<PaginationProps> = ({
 					pageRangeDisplayed={4}
 					marginPagesDisplayed={1}
 					onPageChange={handlePageChange}
-					nextLabel='>'
-					previousLabel='<'
-					containerClassName='flex gap-2'
-					pageLinkClassName='min-w-4 px-2 block text-center'
-					activeClassName='bg-blue-100'
+					nextLabel='→'
+					previousLabel='←'
 					breakLabel='…'
-					breakLinkClassName='pointer-events-none select-none'
 					disableInitialCallback={true}
+					containerClassName='flex gap-1 sm:gap-6 md:gap-8 items-center mx-auto w-min pt-14 text-sm md:text-base'
+					previousLinkClassName='block p-2'
+					nextLinkClassName='block p-2'
+					pageLinkClassName='block py-1 px-2'
+					activeClassName='border-b border-gray-800'
+					breakLinkClassName='pointer-events-none select-none'
+					breakClassName='text-gray-400'
 				/>
 			)}
 		</div>

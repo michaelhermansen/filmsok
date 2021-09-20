@@ -1,23 +1,56 @@
+import { FormEventHandler, useState } from 'react';
+import { LoadingContext } from '../lib/loadingContext';
+import { SearchIcon } from '@heroicons/react/solid';
+import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { SearchIcon, XIcon } from '@heroicons/react/solid';
-import { useState } from 'react';
 
 const Header = () => {
-	const [visibleSearch, setVisibleSearch] = useState(false);
+	const { loading } = useContext(LoadingContext);
+	const router = useRouter();
+
+	const [searchInput, setSearchInput] = useState('');
+
+	const handleSearch: FormEventHandler<HTMLFormElement> = e => {
+		e.preventDefault();
+
+		if (searchInput) {
+			router.push({
+				pathname: 'search',
+				query: {
+					query: encodeURI(searchInput),
+				},
+			});
+		}
+	};
 
 	return (
 		<header className='flex justify-between items-center p-3 border-b border-gray-100 bg-white'>
 			<Link href={'/filmer'}>
 				<a className='font-bold p-1'>Filmsøk</a>
 			</Link>
-			<button
-				onClick={() => setVisibleSearch(s => !s)}
-				className='p-2 bg-gray-100 rounded-full'
-				aria-label='Søk'
-			>
-				{visibleSearch && <SearchIcon className='h-4 w-4' />}
-				{!visibleSearch && <XIcon className='h-4 w-4' />}
-			</button>
+			<section role='search' className='relative flex items-center'>
+				<form onSubmit={handleSearch}>
+					<input
+						className='pl-4 px-10 py-2 w-56 bg-gray-100 rounded-full text-sm'
+						placeholder='Søk etter filmer og tv-serier …'
+						type='text'
+						role='searchbox'
+						name='search'
+						id='search'
+						value={searchInput}
+						onChange={e => setSearchInput(e.target.value)}
+						disabled={loading}
+					/>
+					<button
+						type='submit'
+						className='absolute right-0 p-2 pr-4'
+						disabled={loading}
+					>
+						<SearchIcon className='w-4 h-4' />
+					</button>
+				</form>
+			</section>
 		</header>
 	);
 };

@@ -1,9 +1,8 @@
 import '../global.css';
-import type { AppProps } from 'next/app';
-import { useRouter } from 'next/dist/client/router';
-import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import { LoadingContext } from '../lib/loadingContext';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/dist/client/router';
+import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
@@ -27,18 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<>
-			<Head>
-				<link rel='preconnect' href='https://fonts.googleapis.com' />
-				<link
-					rel='preconnect'
-					href='https://fonts.gstatic.com'
-					crossOrigin='true'
-				/>
-				<link
-					href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap'
-					rel='stylesheet'
-				/>
-			</Head>
 			<LoadingContext.Provider value={{ loading, setLoading }}>
 				<Component {...pageProps} />
 			</LoadingContext.Provider>

@@ -9,7 +9,7 @@ module.exports = {
 			sans: ['IBM Plex Sans', 'sans-serif'],
 		},
 		fontSize: {
-			sm: ['14px', '20px'],
+			sm: ['16px', '20px'],
 			base: ['18px', '24px'],
 			lg: ['28px', '32px'],
 			xl: ['34px', '36px'],
