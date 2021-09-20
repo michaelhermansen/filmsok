@@ -42,12 +42,6 @@ const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 		<Layout>
 			{data && (
 				<>
-					{showFilters && (
-						<Filters
-							closeModal={() => setShowFilters(false)}
-							initialState={data.state}
-						/>
-					)}
 					<Container>
 						<h1 className='text-xl font-bold'>Utforsk</h1>
 						<div className='flex gap-2 mt-5'>
@@ -64,6 +58,12 @@ const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 								Filtrer
 							</Button>
 						</div>
+						{showFilters && (
+							<Filters
+								closeModal={() => setShowFilters(false)}
+								initialState={data.state}
+							/>
+						)}
 					</Container>
 					<div className='px-2 pt-8 grid md:grid-cols-2 md:gap-4 md:mt-4 lg:grid-cols-3 xl:grid-cols-4'>
 						{data.results.map(result => (
