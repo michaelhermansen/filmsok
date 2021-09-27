@@ -24,7 +24,7 @@ const MediaPage = ({ data }: { data: Result }) => {
 						layout='fill'
 						objectFit='cover'
 						alt={`Fremhevet bilde av ${data.title || data.name}`}
-						className='rounded-xl bg-gray-300'
+						className='rounded-xl bg-gray-300 dark:bg-gray-700'
 					/>
 				</div>
 			</div>

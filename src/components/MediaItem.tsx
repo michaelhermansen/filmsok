@@ -22,11 +22,11 @@ const MediaItem: React.FC<MediaItemProps> = ({ media }) => {
 	return (
 		<Link href={`/${mediaType}/${media.id}`}>
 			<a
-				className={`p-2 flex gap-4 items-center rounded-lg hover:bg-white hover:shadow-xl transition-all duration-300 ${
+				className={`p-2 flex gap-4 items-center rounded-lg hover:bg-white dark:hover:bg-gray-800 hover:shadow-xl transition-all duration-300 ${
 					loading && 'opacity-10 pointer-events-none'
 				}`}
 			>
-				<div className='bg-gray-300 h-40 w-28 rounded-md flex-shrink-0 relative overflow-hidden'>
+				<div className='bg-gray-300 dark:bg-gray-800 h-40 w-28 rounded-md flex-shrink-0 relative overflow-hidden'>
 					<Image
 						onError={() => setImgError(true)}
 						src={

@@ -30,11 +30,11 @@ const Dropdown: React.FC<DropdownProps> = ({
 					value={value}
 					onChange={e => setValue(e.target.value)}
 					disabled={loading}
-					className='pl-4 pr-11 py-2 border border-gray-200 bg-white rounded-lg appearance-none w-full font-medium'
+					className='pl-4 pr-11 py-2 border border-gray-200 rounded-lg appearance-none w-full font-medium bg-transparent dark:border-gray-800'
 					{...rest}
 				>
 					{options.map((option, i) => (
-						<option key={i} value={option.value}>
+						<option key={i} value={option.value} className='dark:bg-gray-900'>
 							{option.label}
 						</option>
 					))}

@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({
 			type={type}
 			onClick={onClick}
 			className={[
-				'px-5 py-2 bg-gray-200 font-medium rounded-lg flex gap-2 items-center',
+				'px-5 py-2 bg-gray-200 font-medium rounded-lg flex gap-2 items-center dark:bg-gray-800',
 				className,
 			].join(' ')}
 		>

@@ -44,10 +44,10 @@ const Pagination: React.FC<PaginationProps> = ({
 					breakLabel='…'
 					disableInitialCallback={true}
 					containerClassName='flex gap-3 sm:gap-6 md:gap-9 items-center mx-auto w-min text-sm md:text-base'
-					previousLinkClassName='block w-8 h-8 shadow-lg rounded-full bg-white grid place-items-center'
-					nextLinkClassName='block w-8 h-8 shadow-lg rounded-full bg-white grid place-items-center'
+					previousLinkClassName='block w-8 h-8 shadow-lg rounded-full bg-white grid place-items-center dark:bg-gray-800'
+					nextLinkClassName='block w-8 h-8 shadow-lg rounded-full bg-white grid place-items-center dark:bg-gray-800'
 					pageLinkClassName='block p-1'
-					activeClassName='border-b border-gray-800'
+					activeClassName='border-b border-gray-800 dark:border-gray-50'
 					breakLinkClassName='pointer-events-none select-none text-gray-400'
 				/>
 			)}

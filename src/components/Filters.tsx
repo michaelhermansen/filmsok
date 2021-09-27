@@ -74,12 +74,12 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 	return (
 		<section
 			ref={bgRef}
-			className='fixed inset-0 px-2 bg-black bg-opacity-40 z-50'
+			className='fixed inset-0 px-2 bg-black bg-opacity-40 dark:bg-opacity-75 z-50'
 		>
 			<form
 				onSubmit={handleSubmit}
 				onReset={handleReset}
-				className='bg-gray-50 p-6 rounded-lg max-w-2xl mx-auto shadow-xl relative top-8'
+				className='bg-gray-50 dark:bg-gray-900 p-6 rounded-lg max-w-2xl mx-auto shadow-xl relative top-8'
 			>
 				<button
 					type='button'
@@ -108,7 +108,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 								Fra og med
 							</label>
 							<input
-								className='block w-full py-2 px-4 rounded-lg border border-gray-200 appearance-none h-10'
+								className='block w-full py-2 px-4 rounded-lg border border-gray-200 appearance-none h-10 bg-transparent dark:border-gray-800'
 								type='date'
 								name='date_from'
 								id='date_from'
@@ -121,7 +121,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 								Til og med
 							</label>
 							<input
-								className='block w-full py-2 px-4 rounded-lg border border-gray-200 appearance-none h-10'
+								className='block w-full py-2 px-4 rounded-lg border border-gray-200 appearance-none h-10 bg-transparent dark:border-gray-800'
 								type='date'
 								name='date_to'
 								id='date_to'
@@ -130,7 +130,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 							/>
 						</div>
 					</div>
-					<div className='flex gap-2 flex-col sm:flex-row border-t border-gray-100 pt-6 mt-6'>
+					<div className='flex gap-2 flex-col sm:flex-row border-t border-gray-100 pt-6 mt-6 dark:border-gray-800'>
 						<Button type='reset' className='flex-1'>
 							Nullstill
 						</Button>

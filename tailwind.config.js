@@ -1,9 +1,11 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
 	purge: [
 		'./src/pages/**/*.{js,ts,jsx,tsx}',
 		'./src/components/**/*.{js,ts,jsx,tsx}',
 	],
-	darkMode: false, // or 'media' or 'class'
+	darkMode: 'media',
 	theme: {
 		fontFamily: {
 			sans: ['IBM Plex Sans', 'sans-serif'],
@@ -14,7 +16,11 @@ module.exports = {
 			lg: ['28px', '32px'],
 			xl: ['34px', '36px'],
 		},
-		extend: {},
+		extend: {
+			colors: {
+				gray: colors.trueGray,
+			},
+		},
 	},
 	variants: {
 		extend: {},
