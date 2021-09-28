@@ -1,11 +1,11 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { Result } from '../../types/Response';
+import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { GetServerSideProps } from 'next';
-import Layout from '../../components/Layout';
 import Container from '../../components/shared/Container';
 import generateQueryString from '../../lib/generateQueryString';
-import { Result } from '../../types/Response';
 import Image from 'next/image';
-import { useState } from 'react';
+import Layout from '../../components/Layout';
 
 const MediaPage = ({ data }: { data: Result }) => {
 	const [imgError, setImgError] = useState(false);
@@ -37,16 +37,17 @@ const MediaPage = ({ data }: { data: Result }) => {
 
 export default MediaPage;
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getStaticProps: GetStaticProps = async context => {
 	const media = context.params?.media;
 	const id = context.params?.id;
+	const ttl = 60 * 60 * 12; // 12 timer
 
 	// Endre 'filmer' og 'serier' til 'movie' og 'tv' slik at det passer med TMDB sin api.
 	// Returner 404 om media verken er 'filmer' eller 'serier'.
 	let apiMedia: 'movie' | 'tv';
 	if (media === 'filmer') apiMedia = 'movie';
 	else if (media === 'serier') apiMedia = 'tv';
-	else return { notFound: true };
+	else return { notFound: true, revalidate: ttl };
 
 	const apiQuery = generateQueryString({
 		api_key: process.env.TMDB_API_KEY,
@@ -66,9 +67,14 @@ export const getServerSideProps: GetServerSideProps = async context => {
 				data,
 				key: id,
 			},
+			revalidate: ttl,
 		};
 	} catch (error) {
 		console.error(error);
-		return { props: { data: null } };
+		return { notFound: true, revalidate: ttl };
 	}
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	return { paths: [], fallback: 'blocking' };
 };
