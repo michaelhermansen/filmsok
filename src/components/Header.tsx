@@ -25,7 +25,7 @@ const Header = ({ searchState }: { searchState?: string }) => {
 	};
 
 	return (
-		<header className='flex justify-between items-center p-3 border-b border-gray-100 bg-white dark:bg-gray-900 dark:border-gray-800'>
+		<header className='flex justify-between items-center p-3 border-b border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-900'>
 			<Link href={'/filmer'}>
 				<a className='font-bold p-1'>Filmsøk</a>
 			</Link>
@@ -35,7 +35,7 @@ const Header = ({ searchState }: { searchState?: string }) => {
 				className='relative w-full max-w-sm pl-2'
 			>
 				<input
-					className='pl-4 pr-10 py-2 bg-gray-100 rounded-full text-sm w-full dark:bg-gray-800'
+					className='pl-4 pr-10 py-2 bg-gray-100 rounded-full text-sm w-full dark:bg-gray-900'
 					placeholder='Søk etter filmer og tv-serier …'
 					type='text'
 					role='searchbox'
