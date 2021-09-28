@@ -16,7 +16,7 @@ const Header = ({ searchState }: { searchState?: string }) => {
 
 		if (searchInput) {
 			router.push({
-				pathname: 'search',
+				pathname: '/search',
 				query: {
 					query: encodeURI(searchInput),
 				},
