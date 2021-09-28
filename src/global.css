@@ -8,22 +8,22 @@ body {
 	@apply dark:text-gray-200 dark:bg-gray-900;
 }
 
-html::-webkit-scrollbar {
-	width: 0.6vw;
+::-webkit-scrollbar {
+	width: 12px;
 }
 
-html::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
 	@apply bg-gray-200 dark:bg-gray-800 bg-opacity-50;
 }
 
-html::-webkit-scrollbar-track:hover {
+::-webkit-scrollbar-track:hover {
 	@apply bg-opacity-100;
 }
 
-html::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
 	@apply bg-gray-400 dark:bg-gray-600 bg-opacity-50;
 }
 
-html::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
 	@apply bg-opacity-100;
 }

@@ -25,6 +25,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 	const initialDateTo = initialState.query.to_date?.toString() || '';
 	const [dateToState, setDateToState] = useState(initialDateTo);
 
+	// Lukker modal på klikk utenfor eller esc-key
 	useEffect(() => {
 		const handleClick = (e: MouseEvent) => {
 			if (e.target === bgRef.current) closeModal();
@@ -74,12 +75,12 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 	return (
 		<section
 			ref={bgRef}
-			className='fixed inset-0 px-2 bg-black bg-opacity-40 dark:bg-opacity-75 z-50'
+			className='fixed inset-0 px-2 bg-black bg-opacity-40 dark:bg-opacity-75 z-50 overflow-y-scroll'
 		>
 			<form
 				onSubmit={handleSubmit}
 				onReset={handleReset}
-				className='bg-gray-50 dark:bg-gray-900 p-6 rounded-lg max-w-2xl mx-auto shadow-xl relative top-8'
+				className='bg-gray-50 dark:bg-gray-900 p-6 rounded-lg max-w-2xl mx-auto shadow-xl relative my-8'
 			>
 				<button
 					type='button'
