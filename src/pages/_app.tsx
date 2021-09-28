@@ -3,6 +3,7 @@ import { LoadingContext } from '../lib/loadingContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
 import type { AppProps } from 'next/app';
+import Loading from '../components/Loading';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
 			<LoadingContext.Provider value={{ loading, setLoading }}>
+				{loading && <Loading />}
 				<Component {...pageProps} />
 			</LoadingContext.Provider>
 		</>
