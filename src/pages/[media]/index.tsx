@@ -45,7 +45,7 @@ const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 					<Container>
 						<div className='flex flex-col gap-5 md:gap-20 lg:gap-40 md:flex-row md:items-center md:py-4'>
 							<h1 className='text-xl font-bold'>Utforsk</h1>
-							<div className='flex gap-2 flex-grow'>
+							<div className='flex gap-3 flex-grow'>
 								<Dropdown
 									className='flex-grow'
 									value={mediaPath}
@@ -107,7 +107,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
 	const apiQuery = generateQueryString({
 		api_key: process.env.TMDB_API_KEY,
-		language: 'no',
+		language: 'en',
 		...query,
 	});
 

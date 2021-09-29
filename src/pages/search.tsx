@@ -59,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const apiQuery = generateQueryString({
 		api_key: process.env.TMDB_API_KEY,
 		query: searchQuery,
-		language: 'no',
+		language: 'en',
 		page: context.query.page || '1',
 	});
 

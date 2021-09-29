@@ -6,12 +6,24 @@ import Container from '../../components/shared/Container';
 import generateQueryString from '../../lib/generateQueryString';
 import Image from 'next/image';
 import Layout from '../../components/Layout';
+import translateGenreId from '../../lib/translateGenreId';
 
-const MediaPage = ({ data }: { data: Result }) => {
+interface Data extends Result {
+	genres: { id: number; name: string }[];
+	state: {
+		pathname: 'filmer' | 'serier';
+	};
+}
+
+const MediaPage = ({ data }: { data: Data }) => {
 	const [imgError, setImgError] = useState(false);
 
 	const mediaDate = data.release_date || data.first_air_date || '';
 	const mediaYear = mediaDate.substring(0, 4);
+	const genres = data.genres.map(obj =>
+		translateGenreId(obj.id, data.state.pathname),
+	);
+	console.log(data);
 
 	return (
 		<Layout>
@@ -32,11 +44,19 @@ const MediaPage = ({ data }: { data: Result }) => {
 				</div>
 			</div>
 			<Container>
-				<h1 className='mt-6 text-xl font-bold leading-snug pb-8'>
+				<h1 className='mt-6 text-xl font-bold leading-tight pb-3'>
 					{data.title || data.name}{' '}
-					<span className='font-normal opacity-50'>({mediaYear})</span>
+					{mediaYear && (
+						<span className='font-normal text-gray-500'>({mediaYear})</span>
+					)}
 				</h1>
-				<p>{data.overview}</p>
+				<p className='pb-8 text-gray-500'>{genres.join(', ')}</p>
+				{data.overview && (
+					<div className='max-w-xl'>
+						<h2 className='text-lg font-medium pb-4'>Beskrivelse</h2>
+						<p>{data.overview}</p>
+					</div>
+				)}
 			</Container>
 		</Layout>
 	);
@@ -58,7 +78,7 @@ export const getStaticProps: GetStaticProps = async context => {
 
 	const apiQuery = generateQueryString({
 		api_key: process.env.TMDB_API_KEY,
-		language: 'no',
+		language: 'en',
 	});
 
 	try {
