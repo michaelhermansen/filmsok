@@ -27,3 +27,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	@apply bg-opacity-100;
 }
+
+::-webkit-calendar-picker-indicator {
+	filter: invert(1);
+	mix-blend-mode: difference;
+}

@@ -75,7 +75,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 	return (
 		<section
 			ref={bgRef}
-			className='fixed inset-0 px-2 bg-black bg-opacity-40 dark:bg-opacity-75 z-50 overflow-y-scroll'
+			className='fixed inset-0 px-4 bg-black bg-opacity-40 dark:bg-opacity-75 z-50 overflow-y-scroll'
 		>
 			<form
 				onSubmit={handleSubmit}
@@ -85,7 +85,7 @@ const Filters: React.FC<FiltersProps> = ({ closeModal, initialState }) => {
 				<button
 					type='button'
 					onClick={closeModal}
-					className='absolute top-6 right-6'
+					className='absolute top-5 right-6 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full p-1 transition-colors duration-200'
 				>
 					<XIcon className='h-5 w-5' />
 				</button>
