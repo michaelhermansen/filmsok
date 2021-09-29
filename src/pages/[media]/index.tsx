@@ -43,20 +43,25 @@ const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 			{data && (
 				<>
 					<Container>
-						<h1 className='text-xl font-bold'>Utforsk</h1>
-						<div className='flex gap-2 mt-5'>
-							<Dropdown
-								className='flex-grow'
-								value={mediaPath}
-								setValue={setMediaPath}
-								options={[
-									{ value: 'filmer', label: 'Filmer' },
-									{ value: 'serier', label: 'Serier' },
-								]}
-							/>
-							<Button onClick={() => setShowFilters(true)} Icon={MenuAlt3Icon}>
-								Filtrer
-							</Button>
+						<div className='flex flex-col gap-5 md:gap-20 lg:gap-40 md:flex-row md:items-center md:py-4'>
+							<h1 className='text-xl font-bold'>Utforsk</h1>
+							<div className='flex gap-2 flex-grow'>
+								<Dropdown
+									className='flex-grow'
+									value={mediaPath}
+									setValue={setMediaPath}
+									options={[
+										{ value: 'filmer', label: 'Filmer' },
+										{ value: 'serier', label: 'Serier' },
+									]}
+								/>
+								<Button
+									onClick={() => setShowFilters(true)}
+									Icon={MenuAlt3Icon}
+								>
+									Filtrer
+								</Button>
+							</div>
 						</div>
 						{showFilters && (
 							<Filters
@@ -65,7 +70,7 @@ const DiscoverPage: React.FC<DiscoverPageProps> = ({ data }) => {
 							/>
 						)}
 					</Container>
-					<div className='px-2 pt-8 grid md:grid-cols-2 md:gap-4 md:mt-4 lg:grid-cols-3 xl:grid-cols-4'>
+					<div className='px-2 pt-8 grid md:grid-cols-2 md:gap-4 md:mt-4 lg:grid-cols-3 xl:grid-cols-4 max-w-screen-2xl mx-auto'>
 						{data.results.map(result => (
 							<MediaItem media={result} key={result.id} />
 						))}

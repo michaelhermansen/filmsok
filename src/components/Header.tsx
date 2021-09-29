@@ -25,34 +25,36 @@ const Header = ({ searchState }: { searchState?: string }) => {
 	};
 
 	return (
-		<header className='flex justify-between items-center p-3 border-b border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-900'>
-			<Link href={'/filmer'}>
-				<a className='font-bold p-1'>Filmsøk</a>
-			</Link>
-			<form
-				onSubmit={handleSearch}
-				role='search'
-				className='relative w-full max-w-sm pl-2'
-			>
-				<input
-					className='pl-4 pr-10 py-2 bg-gray-100 rounded-full text-sm w-full dark:bg-gray-900'
-					placeholder='Søk etter filmer og tv-serier …'
-					type='text'
-					role='searchbox'
-					name='search'
-					id='search'
-					value={searchInput}
-					onChange={e => setSearchInput(e.target.value)}
-					disabled={loading}
-				/>
-				<button
-					type='submit'
-					className='absolute right-0 p-2 pr-4'
-					disabled={loading}
+		<header className='p-3 border-b border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-900'>
+			<div className='flex justify-between items-center max-w-screen-2xl mx-auto'>
+				<Link href={'/filmer'}>
+					<a className='font-bold p-1'>Filmsøk</a>
+				</Link>
+				<form
+					onSubmit={handleSearch}
+					role='search'
+					className='relative w-full max-w-sm pl-2'
 				>
-					<SearchIcon className='w-4 h-4' />
-				</button>
-			</form>
+					<input
+						className='pl-4 pr-10 py-2 bg-gray-100 rounded-full text-sm w-full dark:bg-gray-900'
+						placeholder='Søk etter filmer og tv-serier …'
+						type='text'
+						role='searchbox'
+						name='search'
+						id='search'
+						value={searchInput}
+						onChange={e => setSearchInput(e.target.value)}
+						disabled={loading}
+					/>
+					<button
+						type='submit'
+						className='absolute right-0 p-2 pr-4'
+						disabled={loading}
+					>
+						<SearchIcon className='w-4 h-4' />
+					</button>
+				</form>
+			</div>
 		</header>
 	);
 };
