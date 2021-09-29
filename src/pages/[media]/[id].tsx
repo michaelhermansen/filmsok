@@ -18,8 +18,8 @@ const MediaPage = ({ data }: { data: Result }) => {
 						onError={() => setImgError(true)}
 						src={
 							!imgError
-								? `https://image.tmdb.org/t/p/original${data.backdrop_path}`
-								: '/assets/placeholder.svg'
+								? `https://image.tmdb.org/t/p/w1280${data.backdrop_path}`
+								: '/assets/placeholder_backdrop.svg'
 						}
 						layout='fill'
 						objectFit='cover'
