@@ -10,6 +10,9 @@ import Layout from '../../components/Layout';
 const MediaPage = ({ data }: { data: Result }) => {
 	const [imgError, setImgError] = useState(false);
 
+	const mediaDate = data.release_date || data.first_air_date || '';
+	const mediaYear = mediaDate.substring(0, 4);
+
 	return (
 		<Layout>
 			<div className='px-2 mx-auto max-w-5xl'>
@@ -24,12 +27,16 @@ const MediaPage = ({ data }: { data: Result }) => {
 						layout='fill'
 						objectFit='cover'
 						alt={`Fremhevet bilde av ${data.title || data.name}`}
-						className='rounded-xl bg-gray-300 dark:bg-gray-700'
+						className='rounded-3xl bg-gray-300 dark:bg-gray-700'
 					/>
 				</div>
 			</div>
 			<Container>
-				<h1 className='mt-6 text-xl font-bold'>{data.title || data.name}</h1>
+				<h1 className='mt-6 text-xl font-bold leading-snug pb-8'>
+					{data.title || data.name}{' '}
+					<span className='font-normal opacity-50'>({mediaYear})</span>
+				</h1>
+				<p>{data.overview}</p>
 			</Container>
 		</Layout>
 	);
@@ -40,7 +47,7 @@ export default MediaPage;
 export const getStaticProps: GetStaticProps = async context => {
 	const media = context.params?.media;
 	const id = context.params?.id;
-	const ttl = 60 * 60 * 12; // 12 timer
+	const ttl = 60 * 60 * 6; // 6 timer
 
 	// Endre 'filmer' og 'serier' til 'movie' og 'tv' slik at det passer med TMDB sin api.
 	// Returner 404 om media verken er 'filmer' eller 'serier'.
